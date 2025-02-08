@@ -12,8 +12,32 @@
 	</body>
 </html>
 
-<style>
+<style is:global>
+
+@font-face {
+	font-family: 'f1-regular';
+	src: url('/fonts/Formula1-Regular.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'f1-italic';
+	src: url('/fonts/Formula1-Italic.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'f1-bold';
+	src: url('/fonts/Formula1-Bold.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'f1-black';
+	src: url('/fonts/Formula1-Black.woff2') format('woff2');
+}
 	html,
+
+	h1 {
+		font-family: f1-black;
+	}
 	body {
 		margin: 0;
 		width: 100%;

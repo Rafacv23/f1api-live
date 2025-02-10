@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@f1api/sdk": "^0.0.3",
+    "@f1api/sdk": "^0.0.6",
     "astro": "^5.2.5"
   }
 }

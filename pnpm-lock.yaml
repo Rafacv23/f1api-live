@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@f1api/sdk':
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.6
+        version: 0.0.6
       astro:
         specifier: ^5.2.5
         version: 5.2.5(rollup@4.34.6)(typescript@5.7.3)
@@ -204,8 +204,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@f1api/sdk@0.0.3':
-    resolution: {integrity: sha512-MJOfKIgO166zQvybUY/TPFg/i3TrayczM8xP8w7DppofsjzlSM8jhRqUZskgpdx3fl2tnL33dLddHHVZh9b7Vw==}
+  '@f1api/sdk@0.0.6':
+    resolution: {integrity: sha512-Yh0nWSWTxw/Ce6e8CJExkXT8NJuZOYc/4g1MlyiC7amK5EHWjUa8NdFs+oqUBiQNXJZKRO8dxfbdfL2aI9lh6g==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1661,7 +1661,7 @@ snapshots:
   '@esbuild/win32-x64@0.24.2':
     optional: true
 
-  '@f1api/sdk@0.0.3':
+  '@f1api/sdk@0.0.6':
     dependencies:
       isomorphic-unfetch: 4.0.2
 

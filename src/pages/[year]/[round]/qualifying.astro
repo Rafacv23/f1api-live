@@ -1,0 +1,41 @@
+---
+import SessionNav from "@/components/SessionNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+import { checkSprint } from "@/lib/utils";
+
+const { year, round } = Astro.params;
+export const prerender = false
+
+// retrieve qualifying results
+let qualy;
+let raceInfo
+
+if(year && round){
+    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
+    qualy = await f1api.getQualyResults({year: parseInt(year), round: parseInt(round)})
+}
+
+const haveSprint = checkSprint(raceInfo)
+---
+
+<Layout>
+    {raceInfo?.race.map((race) => 
+        <div>
+            <h1>{year} {race.raceName}</h1>
+            <SessionNav year={year} round={round} haveSprint={haveSprint} />
+            <p>{race.schedule.race.date}, {race.circuit.circuitName}, round {race.round}</p>
+        </div>
+        )}
+        <SessionNav year={year} round={round} haveSprint={false} />
+        {qualy?.races.qualyResults.map((result) => 
+        <h2>Practice 3</h2>
+        <div>
+            <h3>{result.driver.surname}</h3>
+            <p>q3 {result.q3}</p>
+            <p>q2 {result.q2}</p>
+            <p>q1 {result.q1}</p>
+        </div>
+        )}
+        )}
+</Layout>

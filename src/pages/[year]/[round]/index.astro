@@ -1,0 +1,27 @@
+---
+export const prerender = false
+import SessionNav from "@/components/SessionNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+import { checkSprint } from "@/lib/utils";
+
+const { year, round } = Astro.params;
+
+let raceInfo
+
+if(year && round){
+    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
+}
+
+const haveSprint = checkSprint(raceInfo)
+---
+
+<Layout>
+    {raceInfo?.race.map((race) => 
+    <div>
+        <h1>{year} {race.raceName}</h1>
+        <SessionNav year={year} round={round} haveSprint={haveSprint} />
+        <p>{race.schedule.race.date}, {race.circuit.circuitName}, round {race.round}</p>
+    </div>
+)}
+</Layout>

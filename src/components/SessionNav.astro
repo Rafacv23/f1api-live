@@ -1,0 +1,20 @@
+---
+interface Props {
+    haveSprint: boolean | undefined
+    year: number | undefined | string
+    round: number | undefined | string
+}
+
+const { haveSprint, year, round } = Astro.props
+---
+
+<nav>
+    <a href={`/${year}/${round}/practice`} title="Practice session">Practice</a>
+    <a href={`/${year}/${round}/qualifying`} title="Qualifying session">Qualifying</a>
+    {
+        haveSprint ? 
+        <a href={`/${year}/${round}/sprint`} title="Sprint session">Sprint</a>
+        : null
+    }
+    <a href={`/${year}/${round}/race`} title="Race session">Race</a>
+</nav>

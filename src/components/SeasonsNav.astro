@@ -1,0 +1,9 @@
+---
+import { f1api } from "@/lib/f1Api"
+
+const seasons = await f1api.getSeasons()
+---
+
+<nav class="grid grid-cols-3">
+    {seasons.championships.map((season) => <a href={`/${season.year}`}>{season.year}</a>)}
+</nav>

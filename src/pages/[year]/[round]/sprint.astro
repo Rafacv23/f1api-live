@@ -1,0 +1,12 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SessionNav from "@/components/SessionNav.astro";
+
+const { year, round } = Astro.params;
+export const prerender = false
+---
+
+<Layout>
+    <SessionNav year={year} round={round} haveSprint={true} />
+    <h1>{year} season info</h1>
+</Layout>

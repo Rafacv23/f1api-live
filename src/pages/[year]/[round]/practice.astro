@@ -1,0 +1,61 @@
+---
+import SessionNav from "@/components/SessionNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+import { checkSprint } from "@/lib/utils";
+
+const { year, round } = Astro.params;
+export const prerender = false
+
+// retrieve free practice sessions
+
+let fp1
+let fp2
+let fp3
+let raceInfo
+let haveSprint: boolean | undefined
+
+if(year && round){
+    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
+    haveSprint = checkSprint(raceInfo)
+    if(haveSprint){
+        fp1 = await f1api.getFp1Results({year: parseInt(year), round: parseInt(round)})
+    } else {
+        fp1 = await f1api.getFp1Results({year: parseInt(year), round: parseInt(round)})
+        fp2 = await f1api.getFp2Results({year: parseInt(year), round: parseInt(round)})
+        fp3 = await f1api.getFp3Results({year: parseInt(year), round: parseInt(round)})
+    }
+}
+---
+
+<Layout>
+    {raceInfo?.race.map((race) => 
+    <div>
+        <h1>{year} {race.raceName}</h1>
+        <SessionNav year={year} round={round} haveSprint={haveSprint} />
+        <p>{race.schedule.race.date}, {race.circuit.circuitName}, round {race.round}</p>
+    </div>
+    )}
+    <SessionNav year={year} round={round} haveSprint={false} />
+    {fp3?.races.fp3Results.map((result) => 
+    <h2>Practice 3</h2>
+    <div>
+        <h3>{result.driver.surname}</h3>
+        <p>{result.time}</p>
+    </div>
+    )}
+    {fp2?.races.fp2Results.map((result) => 
+    <h2>Practice 2</h2>
+    <div>
+        <h3>{result.driver.surname}</h3>
+    <p>{result.time}</p>
+    </div>
+    )}
+    {fp1?.races.fp1Results.map((result) => 
+    <h2>Practice 1</h2>
+        <div>
+        <h3>{result.driver.surname}</h3>
+        <p>{result.time}</p>
+    </div>
+    )}
+</Layout>

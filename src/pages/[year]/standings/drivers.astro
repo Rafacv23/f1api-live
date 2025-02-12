@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+
+const { year } = Astro.params;
+
+export async function getStaticPaths(){
+
+    const seasons = await f1api.getSeasons()
+
+    return seasons.championships.map((season) => ({
+        params: { year: season.year, },
+        props: { year: season.year },
+    }))
+}
+
+let driverStandings
+
+if(year){
+    driverStandings = await f1api.getDriverStandings({year: year})
+}
+
+---
+
+<Layout>
+    <h1>Driver standings, season {year}</h1>
+    {driverStandings?.drivers_championship.map((driver) => 
+        <div>
+            <h2>{driver.driver.surname}</h2>
+            <p>points: {driver.points}</p>
+            <p>position: {driver.position}</p>
+        </div>
+    )}
+</Layout>

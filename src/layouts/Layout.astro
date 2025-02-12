@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
+import background from '@/assets/background.svg';
 ---
 
 <!doctype html>
@@ -14,6 +15,7 @@ import { ViewTransitions } from 'astro:transitions'
 		<ViewTransitions/>
 	</head>
 	<body>
+		<img id="background" src={background.src} alt="" fetchpriority="high" />
 		<slot />
 	</body>
 </html>
@@ -53,4 +55,19 @@ import { ViewTransitions } from 'astro:transitions'
 		height: 100%;
 		font-family: f1-regular;
 	}
+
+	a {
+		font-family: f1-bold;
+	}
+
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
 </style>

@@ -23,10 +23,10 @@ const races = await f1api.getRacesByYear({year: year})
 <Layout>
     <SeasonsNav/>
     <h1>{year} season info</h1>
-    <ul>
+    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
         {races.races.map((race) => 
-            <li>
-                <a href={`/${year}/${race.round}`}>
+            <li class="rounded p-4 shadow hover:shadow-lg bg-secondary text-primary hover:bg-secondary/90 hover:transition">
+                <a class="cursor-pointer" href={`/${year}/${race.round}`}>
                         {race.raceName}
                 </a>
             </li>)}

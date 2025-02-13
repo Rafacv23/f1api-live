@@ -6,15 +6,19 @@ interface Props {
 }
 
 const { haveSprint, year, round } = Astro.props
+
+const links = [
+    { title: "Practice", href: `/${year}/${round}/practice` },
+    { title: "Qualifying", href: `/${year}/${round}/qualifying` },
+    { title: "Sprint", href: `/${year}/${round}/sprint`, show: haveSprint },
+    { title: "Race", href: `/${year}/${round}/race` }
+]
 ---
 
-<nav>
-    <a href={`/${year}/${round}/practice`} title="Practice session">Practice</a>
-    <a href={`/${year}/${round}/qualifying`} title="Qualifying session">Qualifying</a>
-    {
-        haveSprint ? 
-        <a href={`/${year}/${round}/sprint`} title="Sprint session">Sprint</a>
-        : null
-    }
-    <a href={`/${year}/${round}/race`} title="Race session">Race</a>
+<nav class="my-4 space-x-4">
+    {links.map((link) => 
+    <a class="border rounded px-4 py-2 hover:bg-secondary hover:text-primary hover:transition" href={link.href} title={link.title}>
+        {link.title}
+    </a>
+)}
 </nav>

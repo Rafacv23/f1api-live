@@ -21,18 +21,24 @@ const haveSprint = checkSprint(raceInfo)
 ---
 
 <Layout>
-    <div>
+    <div class="mb-8">
         <h1>{year} {race?.races.raceName}</h1>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />
         <p>{race?.races.date}, {race?.races.circuit.circuitName}, round {round}</p>
     </div>
-    {
-        race?.races.results.map((result) => 
-        <div>
-            {result.driver.surname}
-            position: {result.position}
-            points: {result.points}
-        </div>
+    <ul class="grid grid-cols-1 gap-4">
+        {
+            race?.races.results.map((result) => 
+            <li class="bg-secondary text-primary p-4 rounded shadow">
+                <h2>
+                {result.driver.name} {result.driver.surname}
+                </h2>
+                <p>
+                    Position: {result.position}
+                    Points: {result.points}
+                </p>
+            </li>
     )
+    </ul>
     }
 </Layout>

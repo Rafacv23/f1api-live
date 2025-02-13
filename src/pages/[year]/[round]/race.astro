@@ -29,7 +29,7 @@ const haveSprint = checkSprint(raceInfo)
     <ul class="grid grid-cols-1 gap-4">
         {
             race?.races.results.map((result) => 
-            <li class="bg-secondary text-primary p-4 rounded shadow">
+            <li id="card">
                 <h2>
                 {result.driver.name} {result.driver.surname}
                 </h2>

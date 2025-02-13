@@ -27,15 +27,16 @@ const haveSprint = checkSprint(raceInfo)
             <p>{race.schedule.race.date}, {race.circuit.circuitName}, round {race.round}</p>
         </div>
         )}
-        <SessionNav year={year} round={round} haveSprint={false} />
-        {qualy?.races.qualyResults.map((result) => 
-        <h2>Practice 3</h2>
-        <div>
+        <h2>Qualifying</h2>
+        <ul class="grid grid-cols-1 gap-4">
+            {qualy?.races.qualyResults?.map((result) => 
+        <li id="card">
             <h3>{result.driver.surname}</h3>
-            <p>q3 {result.q3}</p>
-            <p>q2 {result.q2}</p>
-            <p>q1 {result.q1}</p>
-        </div>
+            <p>Position: {result.gridPosition}</p>
+            <p>Q3: {result.q3}</p>
+            <p>Q2: {result.q2}</p>
+            <p>Q1: {result.q1}</p>
+        </li>
         )}
         )}
 </Layout>

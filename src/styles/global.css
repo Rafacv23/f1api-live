@@ -8,3 +8,7 @@
 h1 {
   @apply text-5xl;
 }
+
+#card {
+  @apply bg-secondary text-primary p-4 rounded shadow;
+}

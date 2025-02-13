@@ -1,19 +1,39 @@
 ---
 import Nav from '@/components/Nav.astro';
-import { Github } from 'lucide-astro';
+import { Github, Rocket } from 'lucide-astro';
 ---
 
 <div>
 	<Nav/>
 	<main>
-		<section id="hero">
+		<section class="bg-secondary text-primary rounded-lg px-4 py-8 items-center justify-center flex flex-col h-screen">
+			<img src={"logo.avif"} alt="F1 API Live" width={200} height={200} class="rounded-full"/>
 			<h1>
 				F1 API Live
 			</h1>
 			<h2>Your F1 data in real time.</h2>
-			<section id="links">
-				<a class="button" href="/2025">Start</a>
-				<a href="https://astro.build/chat">
+			<section class="flex items-center space-x-8 flex-wrap py-6 shadow">
+				<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href="/2025">
+					<Rocket/>
+					Start
+				</a>
+				<a class="bg-secondary text-primary flex items-center justify-center gap-2 px-4 py-2 rounded-lg" href="https://astro.build/chat">
+					<Github/>
+					GitHub
+				</a>
+			</section>
+		</section>
+		<section class="bg-primary text-secondary rounded-lg px-4 py-8 items-center flex flex-col">
+			<h3>
+				Welcome to your f1 live dashboard
+			</h3>
+			<p>Your F1 data in real time. Provided by our own public API. </p>
+			<section class="flex items-center space-x-8 flex-wrap py-6 shadow">
+				<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href="/2025">
+					<Rocket/>
+					Start
+				</a>
+				<a class="bg-secondary text-primary flex items-center justify-center gap-2 px-4 py-2 rounded-lg" href="https://astro.build/chat">
 					<Github/>
 					GitHub
 				</a>
@@ -24,62 +44,6 @@ import { Github } from 'lucide-astro';
 
 <style>
 
-	main {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-	}
-
-	#hero {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 16px;
-	}
-
-	h1 {
-		font-size: 22px;
-		margin-top: 0.25em;
-	}
-
-	#links {
-		display: flex;
-		gap: 16px;
-	}
-
-	#links a {
-		display: flex;
-		align-items: center;
-		padding: 10px 12px;
-		color: #111827;
-		text-decoration: none;
-		transition: color 0.2s;
-	}
-
-	#links a:hover {
-		color: rgb(78, 80, 86);
-	}
-
-	#links a svg {
-		height: 1em;
-		margin-left: 8px;
-	}
-
-	#links a.button {
-		color: white;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		box-shadow:
-			inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-			inset 0 -2px 0 rgba(0, 0, 0, 0.24);
-		border-radius: 10px;
-	}
-
-	#links a.button:hover {
-		color: rgb(230, 230, 230);
-		box-shadow: none;
-	}
-
 	pre {
 		font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
 			'DejaVu Sans Mono', monospace;
@@ -88,21 +52,6 @@ import { Github } from 'lucide-astro';
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		margin: 0;
-	}
-
-	h2 {
-		margin: 0 0 1em;
-		font-weight: normal;
-		color: #111827;
-		font-size: 20px;
-	}
-
-	p {
-		color: #4b5563;
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.006em;
 		margin: 0;
 	}
 

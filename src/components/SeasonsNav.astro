@@ -1,9 +1,19 @@
 ---
-import { f1api } from "@/lib/f1Api"
+// Import your API function
+import { f1api } from "@/lib/f1Api";
 
-const seasons = await f1api.getSeasons()
+const seasons = await f1api.getSeasons();
 ---
 
-<nav class="grid grid-cols-3">
-    {seasons.championships.map((season) => <a href={`/${season.year}`}>{season.year}</a>)}
-</nav>
+<div class="relative w-full overflow-hidden">
+  <div class="flex space-x-4 overflow-x-auto scrollbar-hide p-4">
+    {seasons.championships.map((season) => (
+      <a 
+        href={`/${season.year}`} 
+        class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
+      >
+        {season.year}
+      </a>
+    ))}
+  </div>
+</div>

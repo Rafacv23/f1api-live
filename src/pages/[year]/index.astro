@@ -21,8 +21,8 @@ const races = await f1api.getRacesByYear({year: year})
 ---
 
 <Layout>
+    <h1 class="my-8">{year} season info</h1>
     <SeasonsNav/>
-    <h1>{year} season info</h1>
     <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
         {races.races.map((race) => 
             <li class="rounded p-4 shadow hover:shadow-lg bg-secondary text-primary hover:bg-secondary/90 hover:transition">

@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #090000;
+  --color-secondary: #ffa7a6;
+}
+
+h1 {
+  @apply text-5xl;
+}

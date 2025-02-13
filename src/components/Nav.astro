@@ -1,6 +1,17 @@
-<nav class="flex items-center justify-center space-x-8 flex-wrap bg-indigo-500 p-6 rounded-b-lg shadow">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
-    <a href="/blog">Blog</a>
+---
+import { Github } from "lucide-astro";
+---
+
+<nav class="flex items-center justify-between space-x-8 flex-wrap py-6 shadow mx-2">
+    <div>
+        <a href="/" class="hover:animate-pulse">F1 API Live</a>
+    </div>
+    <div class="flex items-center space-x-4">
+        <a href="/about" class="hover:animate-pulse">About</a>
+        <a href="/blog" class="hover:animate-pulse">Blog</a>
+        <a href="/contact" class="hover:animate-pulse">Contact</a>
+        <a href="https://github.com/rafacv23/f1api-live" class="hover:animate-pulse">
+            <Github/>
+        </a>
+    </div>
 </nav>

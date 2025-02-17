@@ -16,9 +16,11 @@ const links = [
 ---
 
 <nav class="my-4 space-x-4">
-    {links.map((link) => 
-    <a class="border rounded px-4 py-2 hover:bg-secondary hover:text-primary hover:transition" href={link.href} title={link.title}>
-        {link.title}
-    </a>
-)}
+    {links.map((link) => {
+        return link.show !== false ? (
+            <a class="border rounded px-4 py-2 hover:bg-secondary hover:text-primary hover:transition" href={link.href} title={link.title}>
+                {link.title}
+            </a>
+        ) : null;
+    })}
 </nav>

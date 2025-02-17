@@ -1,0 +1,29 @@
+---
+interface Props {
+    year: string | number
+}
+
+const {year} = Astro.props
+---
+
+
+<nav class="my-4 flex space-x-4">
+    <a 
+    href={`/${year}`} 
+    class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
+    >
+    Races
+    </a>
+    <a 
+    href={`/${year}/standings/drivers`} 
+    class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
+    >
+    Drivers
+    </a>
+    <a 
+    href={`/${year}/standings/teams`} 
+    class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
+    >
+    Teams
+    </a>
+</nav>

@@ -1,6 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
+import SeasonsNav from "@/components/SeasonsNav.astro";
+import SubNav from "@/components/SubNav.astro";
 
 const { year } = Astro.params;
 
@@ -23,12 +25,18 @@ if(year){
 ---
 
 <Layout>
-    <h1>Team standings, season {year}</h1>
-    {teamStandings?.constructors_championship.map((team) => 
-        <div>
+    <main class="py-4">
+        <h1>Team standings, season {year}</h1>
+        <SeasonsNav/>
+        <SubNav year={year}/>
+        <ul class="grid gap-4 my-8">
+            {teamStandings?.constructors_championship.map((team) => 
+        <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">
+            <p>{team.position}.</p>
             <h2>{team.team.teamName}</h2>
-            <p>points: {team.points}</p>
-            <p>position: {team.position}</p>
-        </div>
-    )}
+            <p>Points: {team.points}</p>
+        </li>
+        )}
+    </ul>
+    </main>
 </Layout>

@@ -17,28 +17,32 @@ if (year && round) {
 }
 
 const haveSprint = checkSprint(raceInfo)
-
 ---
 
 <Layout>
     <div class="mb-8">
-        <h1>{year} {race?.races.raceName}</h1>
+        {raceInfo?.race.map((race) => 
+        <h1>Race - {race?.circuit.country} {year}</h1>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />
-        <p>{race?.races.date}, {race?.races.circuit.circuitName}, round {round}</p>
+        <p>{race?.schedule.race.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+        )}
     </div>
-    <ul class="grid grid-cols-1 gap-4">
-        {
-            race?.races.results.map((result) => 
-            <li id="card">
-                <h2>
-                {result.driver.name} {result.driver.surname}
-                </h2>
-                <p>
-                    Position: {result.position}
-                    Points: {result.points}
-                </p>
-            </li>
-    )
-    </ul>
-    }
+    {race && race.races ? (
+        <>
+            <ul class="grid grid-cols-1 gap-4">
+                {race?.races?.results?.map((result) => (
+                    <li id="card">
+                        <h2>{result.driver?.name} {result.driver?.surname}</h2>
+                        <p>
+                            Position: {result.position}
+                            <br />
+                            Points: {result.points}
+                        </p>
+                    </li>
+                ))}
+            </ul>
+        </>
+    ) : (
+        <p>Session data is not available at the moment.</p>
+    )}
 </Layout>

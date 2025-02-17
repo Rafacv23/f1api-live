@@ -29,32 +29,76 @@ if(year && round){
 ---
 
 <Layout>
-    {raceInfo?.race.map((race) => 
-    <div>
-        <h1>{year} {race.raceName}</h1>
+    <div class="mb-8">
+        {raceInfo?.race.map((race) => 
+        <h1>Practice - {race?.circuit.country} {year}</h1>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />
-        <p>{race.schedule.race.date}, {race.circuit.circuitName}, round {race.round}</p>
+        <p>{race?.schedule.fp1.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+        )}
     </div>
-    )}
-    {fp3?.races.fp3Results.map((result) => 
-    <h2>Practice 3</h2>
-    <div>
-        <h3>{result.driver.surname}</h3>
-        <p>{result.time}</p>
-    </div>
-    )}
-    {fp2?.races.fp2Results.map((result) => 
+    <div class="grid space-y-4">
+        <h2>Practice 3</h2>
+        <table class="table-auto w-full">
+            <thead class="border-b bg-secondary text-primary">
+                <tr>
+                    <th class="py-4">Position</th>
+                    <th>Driver</th>
+                    <th>Team</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {fp3?.races.fp3Results.map((result) => 
+          <tr class="border-b">
+            <td class="py-4">{result.fp3Id}</td>
+            <td>{result.driver.name} {result.driver.surname}</td>
+            <td>{result.team.teamName}</td>
+            <td>{result.time}</td>
+          </tr>
+        )}
+        </tbody>
+    </table>
     <h2>Practice 2</h2>
-    <div>
-        <h3>{result.driver.surname}</h3>
-    <p>{result.time}</p>
-    </div>
-    )}
-    {fp1?.races.fp1Results.map((result) => 
+    <table class="table-auto w-full">
+        <thead class="border-b bg-secondary text-primary">
+            <tr>
+                <th class="py-4">Position</th>
+                <th>Driver</th>
+                <th>Team</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {fp2?.races.fp2Results.map((result) => 
+          <tr class="border-b">
+            <td class="py-4">{result.fp2Id}</td>
+            <td>{result.driver.name} {result.driver.surname}</td>
+            <td>{result.team.teamName}</td>
+            <td>{result.time}</td>
+          </tr>
+        )}
+        </tbody>
+    </table>
     <h2>Practice 1</h2>
-        <div>
-        <h3>{result.driver.surname}</h3>
-        <p>{result.time}</p>
-    </div>
-    )}
+    <table class="table-auto w-full">
+        <thead class="border-b bg-secondary text-primary">
+            <tr>
+                <th class="py-4">Position</th>
+                <th>Driver</th>
+                <th>Team</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {fp1?.races.fp1Results.map((result) => 
+         <tr class="border-b">
+            <td class="py-4">{result.fp1Id}</td>
+            <td>{result.driver.name} {result.driver.surname}</td>
+            <td>{result.team.teamName}</td>
+            <td>{result.time}</td>
+          </tr>
+        )}
+        </tbody>
+    </table>
+</div>
 </Layout>

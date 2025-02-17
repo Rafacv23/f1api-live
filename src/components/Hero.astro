@@ -1,46 +1,28 @@
 ---
-import { Github, Rocket } from 'lucide-astro';
-import Header from '@/components/Header.astro';
+import { Github, Play } from 'lucide-astro';
+
+const currentYear = new Date().getFullYear();
 ---
 
-<div>
-	<Header/>
-	<main>
-		<section class="bg-secondary text-primary rounded-lg px-4 py-8 items-center justify-center flex flex-col h-screen">
+<main>
+	<section class="bg-secondary text-primary rounded-lg px-4 py-8 items-center justify-center flex flex-col h-screen">
 			<img src={"logo.avif"} alt="F1 API Live" width={200} height={200} class="rounded-full"/>
 			<h1>
 				F1 API Live
 			</h1>
 			<h2>Your F1 data in real time.</h2>
-			<section class="flex items-center space-x-8 flex-wrap py-6 shadow">
-				<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href="/2025">
-					<Rocket/>
-					Start
+			<section class="flex items-center space-x-8 flex-wrap py-6">
+				<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href={`/${currentYear}`}>
+					<Play/>
+					Live results
 				</a>
 				<a class="bg-secondary text-primary flex items-center justify-center gap-2 px-4 py-2 rounded-lg" href="https://astro.build/chat">
 					<Github/>
 					GitHub
 				</a>
 			</section>
-		</section>
-		<section class="bg-primary text-secondary rounded-lg px-4 py-8 items-center flex flex-col">
-			<h3>
-				Build your own App
-			</h3>
-			<p>Your F1 data in real time. Provided by our own public API. We have all the F1 seasons in just one place. </p>
-			<section class="flex items-center space-x-8 flex-wrap py-6 shadow">
-				<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href="https://f1api.dev">
-					<Rocket/>
-					API
-				</a>
-				<a class="bg-secondary text-primary flex items-center justify-center gap-2 px-4 py-2 rounded-lg" href="https://github.com/Rafacv23/F1-api">
-					<Github/>
-					GitHub
-				</a>
-			</section>
-		</section>
-	</main>
-</div>
+	</section>
+</main>
 
 <style>
 

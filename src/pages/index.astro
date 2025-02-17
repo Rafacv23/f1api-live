@@ -1,8 +1,22 @@
 ---
-import Welcome from '@/components/Welcome.astro';
+import Hero from '@/components/Hero.astro';
+import Section from '@/components/Section.astro';
 import Layout from '@/layouts/Layout.astro';
+import { Github, Rocket } from 'lucide-astro';
 ---
 
 <Layout>
-	<Welcome />
+	<Hero />
+	<Section title='Do you like this App?' description='You can built your own using our free and open source F1 API. F1 data in real time. We have all the F1 seasons in just one place.'>
+		<section class="flex items-center space-x-8 flex-wrap py-6 shadow">
+			<a class="bg-primary text-secondary flex items-center justify-center  gap-2 px-4 py-2 rounded-lg hover:animate-pulse hover:transition" href="https://f1api.dev">
+				<Rocket/>
+				API
+			</a>
+			<a class="bg-secondary text-primary flex items-center justify-center gap-2 px-4 py-2 rounded-lg" href="https://github.com/Rafacv23/F1-api">
+				<Github/>
+				GitHub
+			</a>
+		</section>
+	</Section>
 </Layout>

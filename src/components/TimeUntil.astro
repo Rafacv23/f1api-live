@@ -1,0 +1,12 @@
+---
+interface Props {
+    time: string
+    date: string
+}
+
+const { time, date } = Astro.props
+---
+
+<div>
+    Tiempo hasta el comienzo de la sesion: {date} {time}
+</div>

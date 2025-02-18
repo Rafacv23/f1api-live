@@ -1,4 +1,5 @@
 ---
+import PracticeTable from "@/components/PracticeTable.astro";
 import SessionNav from "@/components/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
@@ -37,68 +38,16 @@ if(year && round){
         )}
     </div>
     <div class="grid space-y-4">
-        <h2>Practice 3</h2>
-        <table class="table-auto w-full">
-            <thead class="border-b bg-secondary text-primary">
-                <tr>
-                    <th class="py-4">Position</th>
-                    <th>Driver</th>
-                    <th>Team</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {fp3?.races.fp3Results.map((result) => 
-          <tr class="border-b">
-            <td class="py-4">{result.fp3Id}</td>
-            <td>{result.driver.name} {result.driver.surname}</td>
-            <td>{result.team.teamName}</td>
-            <td>{result.time}</td>
-          </tr>
-        )}
-        </tbody>
-    </table>
-    <h2>Practice 2</h2>
-    <table class="table-auto w-full">
-        <thead class="border-b bg-secondary text-primary">
-            <tr>
-                <th class="py-4">Position</th>
-                <th>Driver</th>
-                <th>Team</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {fp2?.races.fp2Results.map((result) => 
-          <tr class="border-b">
-            <td class="py-4">{result.fp2Id}</td>
-            <td>{result.driver.name} {result.driver.surname}</td>
-            <td>{result.team.teamName}</td>
-            <td>{result.time}</td>
-          </tr>
-        )}
-        </tbody>
-    </table>
-    <h2>Practice 1</h2>
-    <table class="table-auto w-full">
-        <thead class="border-b bg-secondary text-primary">
-            <tr>
-                <th class="py-4">Position</th>
-                <th>Driver</th>
-                <th>Team</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {fp1?.races.fp1Results.map((result) => 
-         <tr class="border-b">
-            <td class="py-4">{result.fp1Id}</td>
-            <td>{result.driver.name} {result.driver.surname}</td>
-            <td>{result.team.teamName}</td>
-            <td>{result.time}</td>
-          </tr>
-        )}
-        </tbody>
-    </table>
+        {
+            haveSprint ? 
+            <h2>Practice 1</h2>
+            <PracticeTable fpResults={fp1} fpSession="fp1" /> :
+            <h2>Practice 3</h2>
+            <PracticeTable fpResults={fp3} fpSession="fp3" />
+            <h2>Practice 2</h2>
+            <PracticeTable fpResults={fp2} fpSession="fp2" />
+            <h2>Practice 1</h2>
+            <PracticeTable fpResults={fp1} fpSession="fp1" />
+        }
 </div>
 </Layout>

@@ -7,7 +7,7 @@ import { f1api } from "@/lib/f1Api";
 const { year } = Astro.params;
 
 export async function getStaticPaths() {
-    const seasons = await f1api.getSeasons();
+    const seasons = await f1api.getSeasons({limit: 100});
     const currentYear = new Date().getFullYear()
 
   return seasons.championships

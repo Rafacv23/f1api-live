@@ -4,7 +4,7 @@ import SessionNav from "@/components/SessionNav.astro";
 import { f1api } from "@/lib/f1Api";
 
 export async function getStaticPaths() {
-  const seasons = await f1api.getSeasons({limit:1});
+  const seasons = await f1api.getSeasons({limit:100});
   const currentYear = new Date().getFullYear();
 
   const staticPaths = [];

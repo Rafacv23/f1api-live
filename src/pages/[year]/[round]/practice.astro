@@ -6,7 +6,7 @@ import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
 export async function getStaticPaths() {
-  const seasons = await f1api.getSeasons({limit:2});
+  const seasons = await f1api.getSeasons({limit:100});
   const currentYear = new Date().getFullYear();
 
   const staticPaths = [];

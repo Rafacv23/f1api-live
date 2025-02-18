@@ -1,4 +1,5 @@
 ---
+import CalendarNav from "@/components/CalendarNav.astro";
 import PracticeTable from "@/components/PracticeTable.astro";
 import SessionNav from "@/components/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -59,11 +60,12 @@ if (year && round) {
 
 <Layout>
     <div class="mb-8">
+      {year ? <CalendarNav year={year} /> : null}
         {raceInfo?.race.map((race) => 
             <h1>Practice - {race?.circuit.country} {year}</h1>
+            <SessionNav year={year} round={round} haveSprint={haveSprint} />
+            <p>{raceInfo?.race[0]?.schedule.fp1.date}, {raceInfo?.race[0]?.circuit.circuitName}, round {raceInfo?.race[0]?.round}</p>
         )}
-        <SessionNav year={year} round={round} haveSprint={haveSprint} />
-        <p>{raceInfo?.race[0]?.schedule.fp1.date}, {raceInfo?.race[0]?.circuit.circuitName}, round {raceInfo?.race[0]?.round}</p>
     </div>
     <div class="grid space-y-4">
         {fp1 ? (

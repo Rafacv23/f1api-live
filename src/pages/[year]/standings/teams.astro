@@ -6,22 +6,10 @@ import SubNav from "@/components/SubNav.astro";
 
 const { year } = Astro.params;
 
-export async function getStaticPaths() {
-    const seasons = await f1api.getSeasons({limit:100});
-    const currentYear = new Date().getFullYear()
-
-  return seasons.championships
-    .filter((season) => season.year < currentYear) // only previous seasons
-    .map((season) => ({
-      params: { year: season.year },
-      props: { year: season.year },
-    }));
-}
-
 let teamStandings
 
 if(year){
-    teamStandings = await f1api.getConstructorStandings({year: year})
+    teamStandings = await f1api.getConstructorStandings({year: parseInt(year)})
 }
 
 ---
@@ -30,7 +18,8 @@ if(year){
     <main class="py-4">
         <h1>Team standings, season {year}</h1>
         <SeasonsNav/>
-        <SubNav year={year}/>
+        { year ?      <SubNav year={parseInt(year)} />
+ : null}
         <ul class="grid gap-4 my-8">
             {teamStandings?.constructors_championship.map((team) => 
         <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">

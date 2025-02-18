@@ -6,22 +6,10 @@ import { f1api } from "@/lib/f1Api";
 
 const { year } = Astro.params;
 
-export async function getStaticPaths() {
-    const seasons = await f1api.getSeasons({limit: 100});
-    const currentYear = new Date().getFullYear()
-
-  return seasons.championships
-    .filter((season) => season.year < currentYear) // only previous seasons
-    .map((season) => ({
-      params: { year: season.year },
-      props: { year: season.year },
-    }));
-}
-
 let driverStandings
 
 if(year){
-    driverStandings = await f1api.getDriverStandings({year: year})
+    driverStandings = await f1api.getDriverStandings({year: parseInt(year)})
 }
 
 ---
@@ -29,7 +17,8 @@ if(year){
 <Layout>
     <h1>Driver standings, season {year}</h1>
     <SeasonsNav/>
-    <SubNav year={year}/>
+    { year ?      <SubNav year={parseInt(year)} />
+ : null}
     <ul class="grid gap-4 my-8">
         {driverStandings?.drivers_championship.map((driver) => 
         <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">

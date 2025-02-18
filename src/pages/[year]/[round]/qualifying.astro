@@ -6,28 +6,6 @@ import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
-export async function getStaticPaths() {
-  const seasons = await f1api.getSeasons({limit:100});
-  const currentYear = new Date().getFullYear();
-
-  const staticPaths = [];
-
-  for (const season of seasons.championships) {
-    if (season.year < currentYear) {
-      const races = await f1api.getRacesByYear({ year: season.year });
-
-      for (const race of races.races) {
-        staticPaths.push({
-          params: { year: season.year, round: race.round.toString() },
-          props: { year: season.year, round: race.round.toString() },
-        });
-      }
-    }
-  }
-
-  return staticPaths;
-}
-
 const { year, round } = Astro.params;
 
 // retrieve qualifying results
@@ -35,10 +13,10 @@ let qualy;
 let raceInfo
 
 if(year && round){
-    raceInfo = await f1api.getRaceInfo({year: year, round: parseInt(round)})
+    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
 
     try {
-        qualy = await f1api.getQualyResults({year: year, round: parseInt(round)})
+        qualy = await f1api.getQualyResults({year: parseInt(year), round: parseInt(round)})
     } catch (error) {
         console.error(`Qualifying results not found for ${year}, round ${round}`);
     }
@@ -49,7 +27,7 @@ const haveSprint = checkSprint(raceInfo)
 
 <Layout>
     <div class="mb-8">
-      {year ? <CalendarNav year={year} /> : null}
+      {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
         <h1>Qualifying - {race?.circuit.country} {year}</h1>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />

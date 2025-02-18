@@ -6,26 +6,18 @@ import { f1api } from "@/lib/f1Api";
 
 const { year } = Astro.params;
 
-export async function getStaticPaths() {
-    const seasons = await f1api.getSeasons({limit:100});
-    const currentYear = new Date().getFullYear()
+let races 
 
-  return seasons.championships
-    .filter((season) => season.year < currentYear) // only previous seasons
-    .map((season) => ({
-      params: { year: season.year },
-      props: { year: season.year },
-    }));
+if(year){
+races =  await f1api.getRacesByYear({ year: parseInt(year) });
 }
-
-const races =  await f1api.getRacesByYear({ year });
 ---
 
 <Layout>
     <h1 class="my-4">{year} F1 Calendar</h1>
     <SeasonsNav/>
-    <SubNav year={year}/>
-    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+    { year ?      <SubNav year={parseInt(year)} />
+ : null}    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
         {races?.races.map((race) => 
             <li class="rounded p-4 shadow hover:shadow-lg bg-secondary text-primary hover:bg-secondary/90 hover:transition">
                 <a class="cursor-pointer" href={`/${year}/${race.round}/race`}>

@@ -6,7 +6,6 @@ import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
 const { year, round } = Astro.params;
-export const prerender = false
 
 // retrieve qualifying results
 let qualy;
@@ -14,7 +13,12 @@ let raceInfo
 
 if(year && round){
     raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
-    qualy = await f1api.getQualyResults({year: parseInt(year), round: parseInt(round)})
+
+    try {
+        qualy = await f1api.getQualyResults({year: parseInt(year), round: parseInt(round)})
+    } catch (error) {
+        console.error(`Qualifying results not found for ${year}, round ${round}`);
+    }
 }
 
 const haveSprint = checkSprint(raceInfo)
@@ -28,7 +32,7 @@ const haveSprint = checkSprint(raceInfo)
         <p>{race?.schedule.qualy.date}, {race?.circuit.circuitName}, round {race?.round}</p>
         )}
     </div>
-    {qualy && qualy.races ? (
+    {qualy ? (
         <QualyTable qualyResults={qualy} />
     ) : (
         <p>Session data is not available at the moment.</p>

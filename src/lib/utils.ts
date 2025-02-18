@@ -8,3 +8,9 @@ export const checkSprint = (
   )
   return haveSprint
 }
+
+export function redirect(year: number): string {
+  const currentYear = new Date().getFullYear()
+
+  return year === currentYear ? `/current` : `/${year}`
+}

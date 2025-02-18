@@ -5,7 +5,6 @@ import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
 const { year, round } = Astro.params;
-export const prerender = false
 
 let race
 let raceInfo
@@ -13,7 +12,11 @@ let raceInfo
 //retrieve race result
 if (year && round) {
     raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
-    race = await f1api.getRaceResults({ year: parseInt(year), round: parseInt(round) });
+    try {
+        race = await f1api.getRaceResults({ year: parseInt(year), round: parseInt(round) });
+    } catch (error) {
+        console.error(`Race results not found for ${year}, round ${round}`);
+    }
 }
 
 const haveSprint = checkSprint(raceInfo)
@@ -27,7 +30,7 @@ const haveSprint = checkSprint(raceInfo)
         <p>{race?.schedule.race.date}, {race?.circuit.circuitName}, round {race?.round}</p>
         )}
     </div>
-    {race && race.races ? (
+    {race ? (
         <>
             <ul class="grid grid-cols-1 gap-4">
                 {race?.races?.results?.map((result) => (

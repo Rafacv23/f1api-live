@@ -1,6 +1,7 @@
 ---
 // Import your API function
 import { f1api } from "@/lib/f1Api";
+import { redirect } from "@/lib/utils";
 
 const seasons = await f1api.getSeasons({limit: 100});
 ---
@@ -9,7 +10,7 @@ const seasons = await f1api.getSeasons({limit: 100});
   <div class="flex space-x-4 overflow-x-auto p-4">
     {seasons.championships.map((season) => (
       <a 
-        href={`/${season.year}`} 
+        href={redirect(season.year)} 
         class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
       >
         {season.year}

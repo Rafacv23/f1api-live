@@ -1,0 +1,44 @@
+---
+import CalendarNav from "@/components/CalendarNav.astro";
+import QualyTable from "@/components/QualyTable.astro";
+import SessionNav from "@/components/SessionNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+import { checkSprint } from "@/lib/utils";
+
+export const prerender = false; //disable static generation for current season
+
+const { round } = Astro.params;
+const currentYear = new Date().getFullYear();
+
+// retrieve qualifying results
+let qualy;
+let raceInfo
+
+if(round){
+    raceInfo = await f1api.getRaceInfo({year: currentYear, round: parseInt(round)})
+    try {
+        qualy = await f1api.getQualyResults({year: currentYear, round: parseInt(round)})
+    } catch (error) {
+        console.error(`Qualifying results not found for ${currentYear}, round ${round}`);
+    }
+}
+
+const haveSprint = checkSprint(raceInfo)
+---
+
+<Layout>
+    <div class="mb-8">
+      {currentYear ? <CalendarNav year={currentYear} /> : null}
+        {raceInfo?.race.map((race) => 
+        <h1>Qualifying - {race?.circuit.country} {currentYear}</h1>
+        <SessionNav year={currentYear} round={round} haveSprint={haveSprint} />
+        <p>{race?.schedule.qualy.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+        )}
+    </div>
+    {qualy ? (
+        <QualyTable qualyResults={qualy} />
+    ) : (
+        <p>Session data is not available at the moment.</p>
+    )}
+</Layout>

@@ -1,0 +1,26 @@
+---
+import SeasonsNav from "@/components/SeasonsNav.astro";
+import SubNav from "@/components/SubNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+
+const year = new Date().getFullYear()
+
+const races = await f1api.getRacesByYear({ year });
+---
+
+<Layout>
+    <h1 class="my-4">{year} F1 Calendar</h1>
+    <SeasonsNav/>
+    <SubNav year={year}/>
+    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+        {races?.races.map((race) => 
+            <li class="rounded p-4 shadow hover:shadow-lg bg-secondary text-primary hover:bg-secondary/90 hover:transition">
+                <a class="cursor-pointer" href={`/current/${race.round}/race`}>
+                    {race.round}. 
+                    {race.circuit.country}
+                    {race.schedule.race.date}
+                </a>
+            </li>)}
+    </ul>
+</Layout>

@@ -1,0 +1,57 @@
+---
+import CalendarNav from "@/components/CalendarNav.astro";
+import SessionNav from "@/components/SessionNav.astro";
+import Layout from "@/layouts/Layout.astro";
+import { f1api } from "@/lib/f1Api";
+import { checkSprint } from "@/lib/utils";
+
+export const prerender = false; //disable static generation for current season
+
+const currentYear = new Date().getFullYear();
+
+const { round } = Astro.params;
+
+let race
+let raceInfo
+
+//retrieve race result
+if (round) {
+    raceInfo = await f1api.getRaceInfo({year: currentYear, round: parseInt(round)})
+    try {
+        race = await f1api.getRaceResults({ year: currentYear, round: parseInt(round) });
+    } catch (error) {
+        console.error(`Race results not found for ${currentYear}, round ${round}`);
+    }
+}
+
+const haveSprint = checkSprint(raceInfo)
+---
+
+<Layout>
+    <div class="mb-8">
+        {currentYear ? <CalendarNav year={currentYear} /> : null}
+        {raceInfo?.race.map((race) => 
+        <h1>Race - {race?.circuit.country} {currentYear}</h1>
+        <SessionNav year={"current"} round={round} haveSprint={haveSprint} />
+        <p>{race?.schedule.race.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+        )}
+    </div>
+    {race ? (
+        <>
+            <ul class="grid grid-cols-1 gap-4">
+                {race?.races?.results?.map((result) => (
+                    <li id="card">
+                        <h2>{result.driver?.name} {result.driver?.surname}</h2>
+                        <p>
+                            Position: {result.position}
+                            <br />
+                            Points: {result.points}
+                        </p>
+                    </li>
+                ))}
+            </ul>
+        </>
+    ) : (
+        <p>Session data is not available at the moment.</p>
+    )}
+</Layout>

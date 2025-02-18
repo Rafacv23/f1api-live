@@ -5,7 +5,6 @@ import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 
 const { year } = Astro.params;
-const currentYear = new Date().getFullYear()
 
 export async function getStaticPaths() {
     const seasons = await f1api.getSeasons({limit:100});
@@ -19,8 +18,7 @@ export async function getStaticPaths() {
     }));
 }
 
-
-const races = year < currentYear ? await f1api.getRacesByYear({ year }) : null;
+const races =  await f1api.getRacesByYear({ year });
 ---
 
 <Layout>

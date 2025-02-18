@@ -6,48 +6,66 @@ import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
 const { year, round } = Astro.params;
-export const prerender = false
 
 // retrieve free practice sessions
+let fp1;
+let fp2;
+let fp3;
+let raceInfo;
+let haveSprint: boolean | undefined;
 
-let fp1
-let fp2
-let fp3
-let raceInfo
-let haveSprint: boolean | undefined
+if (year && round) {
+  raceInfo = await f1api.getRaceInfo({ year: parseInt(year), round: parseInt(round) });
+  haveSprint = checkSprint(raceInfo);
 
-if(year && round){
-    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
-    haveSprint = checkSprint(raceInfo)
-    if(haveSprint){
-        fp1 = await f1api.getFp1Results({year: parseInt(year), round: parseInt(round)})
-    } else {
-        fp1 = await f1api.getFp1Results({year: parseInt(year), round: parseInt(round)})
-        fp2 = await f1api.getFp2Results({year: parseInt(year), round: parseInt(round)})
-        fp3 = await f1api.getFp3Results({year: parseInt(year), round: parseInt(round)})
+  try {
+    fp1 = await f1api.getFp1Results({ year: parseInt(year), round: parseInt(round) });
+    // Continue if data is available
+    } catch (error) {
+        // Handle case where the endpoint doesn't return results
+        console.error(`FP1 results not found for ${year}, round ${round}`);
     }
+
+
+  if (fp1) {
+    if (!haveSprint) {
+      fp2 = await f1api.getFp2Results({ year: parseInt(year), round: parseInt(round) });
+      fp3 = await f1api.getFp3Results({ year: parseInt(year), round: parseInt(round) });
+    }
+  }
 }
 ---
 
 <Layout>
     <div class="mb-8">
         {raceInfo?.race.map((race) => 
-        <h1>Practice - {race?.circuit.country} {year}</h1>
-        <SessionNav year={year} round={round} haveSprint={haveSprint} />
-        <p>{race?.schedule.fp1.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+            <h1>Practice - {race?.circuit.country} {year}</h1>
         )}
+        <SessionNav year={year} round={round} haveSprint={haveSprint} />
+        <p>{raceInfo?.race[0]?.schedule.fp1.date}, {raceInfo?.race[0]?.circuit.circuitName}, round {raceInfo?.race[0]?.round}</p>
     </div>
     <div class="grid space-y-4">
-        {
-            haveSprint ? 
-            <h2>Practice 1</h2>
-            <PracticeTable fpResults={fp1} fpSession="fp1" /> :
-            <h2>Practice 3</h2>
-            <PracticeTable fpResults={fp3} fpSession="fp3" />
-            <h2>Practice 2</h2>
-            <PracticeTable fpResults={fp2} fpSession="fp2" />
-            <h2>Practice 1</h2>
-            <PracticeTable fpResults={fp1} fpSession="fp1" />
-        }
-</div>
+        {fp1 ? (
+            <>
+              {haveSprint ? (
+                <>
+                  <h2>Practice 1</h2>
+                  <PracticeTable fpResults={fp1} fpSession="fp1" />
+                </>
+              ) : (
+                <>
+                  <h2>Practice 3</h2>
+                  {fp3 ? <PracticeTable fpResults={fp3} fpSession="fp3" /> : null}
+                  <h2>Practice 2</h2>
+                  {fp2 ? <PracticeTable fpResults={fp2} fpSession="fp2" /> : null}
+                  <h2>Practice 1</h2>
+                  <PracticeTable fpResults={fp1} fpSession="fp1" />
+                </>
+              )}
+            </>
+          ) : (
+            <div>No Practice data available</div>
+          )}
+    </div>
 </Layout>
+

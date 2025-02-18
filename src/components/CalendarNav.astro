@@ -1,0 +1,28 @@
+---
+// Import your API function
+import { f1api } from "@/lib/f1Api";
+
+interface Props {
+    year: number
+}
+
+const { year } = Astro.props;
+
+const calendar = await f1api.getRacesByYear({year: year});
+---
+<nav class="flex items-center justify-between">
+    <a href={`/${year}`} title={`${year} F1 Calendar`} class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition">Back</a>
+    <div class="relative w-full overflow-hidden">
+        <div class="flex space-x-4 overflow-x-auto p-4">
+            {calendar.races.map((race) => (
+                <a 
+                href={`/${year}/${race.round}/race`} 
+                title={`${race.round} ${race.raceName}`}
+                class="flex-shrink-0 border border-secondary text-secondary px-4 py-2 rounded-lg hover:bg-secondary hover:text-primary hover:transition"
+                >
+        {race.raceName}
+      </a>
+    ))}
+  </div>
+</div>
+</nav>

@@ -3,6 +3,28 @@ import Layout from "@/layouts/Layout.astro";
 import SessionNav from "@/components/SessionNav.astro";
 import { f1api } from "@/lib/f1Api";
 
+export async function getStaticPaths() {
+  const seasons = await f1api.getSeasons({limit:1});
+  const currentYear = new Date().getFullYear();
+
+  const staticPaths = [];
+
+  for (const season of seasons.championships) {
+    if (season.year < currentYear) {
+      const races = await f1api.getRacesByYear({ year: season.year });
+
+      for (const race of races.races) {
+        staticPaths.push({
+          params: { year: season.year, round: race.round.toString() },
+          props: { year: season.year, round: race.round.toString() },
+        });
+      }
+    }
+  }
+
+  return staticPaths;
+}
+
 const { year, round } = Astro.params;
 
 let qualy
@@ -10,11 +32,11 @@ let race
 let raceInfo
 
 if (year && round) {
-    raceInfo = await f1api.getRaceInfo({year: parseInt(year), round: parseInt(round)})
+    raceInfo = await f1api.getRaceInfo({year: year, round: parseInt(round)})
     if(raceInfo.race[0].schedule.sprintRace){
         try {
-            qualy = await f1api.getSprintQualyResults({ year: parseInt(year), round: parseInt(round) });
-            race = await f1api.getSprintRaceResults({ year: parseInt(year), round: parseInt(round) });
+            qualy = await f1api.getSprintQualyResults({ year: year, round: parseInt(round) });
+            race = await f1api.getSprintRaceResults({ year: year, round: parseInt(round) });
         } catch (error) {
             console.error(`Qualifying results not found for ${year}, round ${round}`);
         }

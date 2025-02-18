@@ -5,8 +5,29 @@ import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 import { checkSprint } from "@/lib/utils";
 
-const { year, round } = Astro.params;
+export async function getStaticPaths() {
+  const seasons = await f1api.getSeasons({limit:2});
+  const currentYear = new Date().getFullYear();
 
+  const staticPaths = [];
+
+  for (const season of seasons.championships) {
+    if (season.year < currentYear) {
+      const races = await f1api.getRacesByYear({ year: season.year });
+
+      for (const race of races.races) {
+        staticPaths.push({
+          params: { year: season.year, round: race.round.toString() },
+          props: { year: season.year, round: race.round.toString() },
+        });
+      }
+    }
+  }
+
+  return staticPaths;
+}
+
+const { year, round } = Astro.params;
 // retrieve free practice sessions
 let fp1;
 let fp2;
@@ -15,11 +36,11 @@ let raceInfo;
 let haveSprint: boolean | undefined;
 
 if (year && round) {
-  raceInfo = await f1api.getRaceInfo({ year: parseInt(year), round: parseInt(round) });
+  raceInfo = await f1api.getRaceInfo({ year: year, round: parseInt(round) });
   haveSprint = checkSprint(raceInfo);
 
   try {
-    fp1 = await f1api.getFp1Results({ year: parseInt(year), round: parseInt(round) });
+    fp1 = await f1api.getFp1Results({ year: year, round: parseInt(round) });
     // Continue if data is available
     } catch (error) {
         // Handle case where the endpoint doesn't return results
@@ -29,8 +50,8 @@ if (year && round) {
 
   if (fp1) {
     if (!haveSprint) {
-      fp2 = await f1api.getFp2Results({ year: parseInt(year), round: parseInt(round) });
-      fp3 = await f1api.getFp3Results({ year: parseInt(year), round: parseInt(round) });
+      fp2 = await f1api.getFp2Results({ year: year, round: parseInt(round) });
+      fp3 = await f1api.getFp3Results({ year: year, round: parseInt(round) });
     }
   }
 }

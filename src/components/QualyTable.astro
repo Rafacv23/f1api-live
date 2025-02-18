@@ -1,0 +1,35 @@
+---
+
+interface Props {
+    qualyResults: any
+}
+
+const { qualyResults } = Astro.props;
+
+const results = qualyResults?.races?.qualyResults
+---
+
+<table class="table-auto w-full mb-4">
+    <thead class="border-b bg-secondary text-primary">
+        <tr>
+            <th class="py-4">Position</th>
+            <th>Driver</th>
+            <th>Team</th>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+        </tr>
+    </thead>
+    <tbody>
+        {results.map((result: any) => 
+        <tr class="border-b">
+            <td class="py-4">{result.gridPosition}</td>
+            <td>{result.driver.name} {result.driver.surname}</td>
+            <td>{result.team.teamName}</td>
+            <td>{result.q1}</td>
+            <td>{result.q2}</td>
+            <td>{result.q3}</td>
+        </tr>
+        )}
+    </tbody>
+</table>

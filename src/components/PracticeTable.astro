@@ -11,7 +11,7 @@ const results = fpResults?.races?.[`${fpSession}Results`]
 // Function to generate positions based on time
 const generatePositions = (results: any[]): any[] => {
     return results
-        .map((result: any) => ({ ...result, time: result.time?.time }))
+        .map((result: any) => ({ ...result, time: result.time }))
         .sort((a, b) => a.time - b.time) // Sort by time
         .map((result, index) => ({ ...result, position: index + 1 })); // Assign position based on sorted order
 };
@@ -19,7 +19,7 @@ const generatePositions = (results: any[]): any[] => {
 const processedResults = generatePositions(results);
 
 ---
-<table class="table-auto w-full">
+<table class="table-auto w-full mb-4">
     <thead class="border-b bg-secondary text-primary">
         <tr>
             <th class="py-4">Position</th>

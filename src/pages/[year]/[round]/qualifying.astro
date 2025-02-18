@@ -1,4 +1,5 @@
 ---
+import QualyTable from "@/components/QualyTable.astro";
 import SessionNav from "@/components/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
@@ -28,18 +29,7 @@ const haveSprint = checkSprint(raceInfo)
         )}
     </div>
     {qualy && qualy.races ? (
-        <>
-            <ul class="grid grid-cols-1 gap-4">
-                {qualy?.races?.qualyResults?.map((result) => (
-                    <li id="card">
-                        <h2>{result.driver?.name} {result.driver?.surname}</h2>
-                        <p>Q3: {result.q3}</p>
-                        <p>Q2: {result.q2}</p>
-                        <p>Q1: {result.q1}</p>
-                    </li>
-                ))}
-            </ul>
-        </>
+        <QualyTable qualyResults={qualy} />
     ) : (
         <p>Session data is not available at the moment.</p>
     )}

@@ -3,7 +3,7 @@ import CalendarNav from "@/components/CalendarNav.astro";
 import SessionNav from "@/components/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
-import { checkSprint } from "@/lib/utils";
+import { checkSprint, formatDate } from "@/lib/utils";
 
 const { year, round } = Astro.params;
 
@@ -29,7 +29,7 @@ const haveSprint = checkSprint(raceInfo)
         {raceInfo?.race.map((race) => 
         <h1>Race - {race?.circuit.country} {year}</h1>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />
-        <p>{race?.schedule.race.date}, {race?.circuit.circuitName}, round {race?.round}</p>
+        <p>{formatDate(race?.schedule.race.date)}, {race?.circuit.circuitName}, round {race?.round}</p>
         )}
     </div>
     {race ? (

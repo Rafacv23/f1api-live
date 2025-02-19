@@ -2,21 +2,20 @@
 import { Download, Github } from "lucide-astro";
 ---
 
-<header class="flex items-center justify-between space-x-8 flex-wrap py-6 shadow mx-2">
+<header class="flex items-center justify-between md:space-x-8 md:flex-wrap py-6 shadow mx-2">
     <div>
-        <a href="/" class="cursor-pointer flex items-center space-x-2 hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out" title="Home page">
-            <img src="/logo.avif" alt="F1 API Logo" class="h-12 w-auto" />
+        <a href="/" class="cursor-pointer flex items-center space-x-2 hover:bg-secondary/30 md:px-4 py-2 rounded transition duration-300 ease-in-out" title="Home page">
+            <img src="/logo.avif" alt="F1 API Logo" class="h-6 md:h-12 w-auto" />
             <h2>
                 F1 API Live
             </h2>
         </a>
     </div>
-    <div class="flex items-center space-x-2">
-        <a href="/about" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">About</a>
-        <a href="https://f1api.dev/blog" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">Blog</a>
-        <a href="https://f1api.dev/contact" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">Contact</a>
-        <a href="https://github.com/rafacv23/f1api-live" title="GitHub repository" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out"><Github/></a>
-        <a href="https://github.com/rafacv23/f1api-sdk" title="NPM package" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">
+    <div class="flex items-center md:space-x-2">
+        <a href="https://f1api.dev/blog" class="cursor-pointer hover:bg-secondary/30 px-2 md:px-4 py-2 rounded transition duration-300 ease-in-out">Blog</a>
+        <a href="https://f1api.dev/contact" class="cursor-pointer hover:bg-secondary/30 px-2 md:px-4 py-2 rounded transition duration-300 ease-in-out">Contact</a>
+        <a href="https://github.com/rafacv23/f1api-live" title="GitHub repository" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-2 md:px-4 py-2 rounded transition duration-300 ease-in-out"><Github/></a>
+        <a href="https://github.com/rafacv23/f1api-sdk" title="NPM package" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-2 md:px-4 py-2 rounded transition duration-300 ease-in-out">
             <Download/>
         </a>
     </div>

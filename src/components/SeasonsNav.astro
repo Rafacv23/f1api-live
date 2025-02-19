@@ -6,7 +6,7 @@ const seasons = await f1api.getSeasons({limit: 100});
 ---
 
 <div class="relative w-full overflow-hidden">
-  <div class="flex space-x-4 overflow-x-auto p-4">
+  <div class="flex space-x-4 overflow-x-auto">
     {seasons.championships.map((season) => (
       <a 
         href={`/${season.year}`} 

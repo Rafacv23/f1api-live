@@ -4,19 +4,19 @@ import { Download, Github, Star } from "lucide-astro";
 
 <header class="flex items-center justify-between space-x-8 flex-wrap py-6 shadow mx-2">
     <div>
-        <a href="/" class="hover:animate-pulse flex items-center space-x-2" title="Home page">
+        <a href="/" class="cursor-pointer flex items-center space-x-2 hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out" title="Home page">
             <img src="/logo.avif" alt="F1 API Logo" class="h-12 w-auto" />
             <h2>
                 F1 API Live
             </h2>
         </a>
     </div>
-    <div class="flex items-center space-x-4">
-        <a href="/about" class="hover:animate-pulse">About</a>
-        <a href="/blog" class="hover:animate-pulse">Blog</a>
-        <a href="/contact" class="hover:animate-pulse">Contact</a>
-        <a href="https://github.com/rafacv23/f1api-live" title="GitHub repository" target="_blank" rel="noreferrer" class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-primary px-6 font-medium text-secondary hover:cursor-pointer duration-500"><div class="translate-x-0 opacity-100 transition group-hover:-translate-x-[150%] group-hover:opacity-0"><Github/></div><div class="absolute translate-x-[150%] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100"><Star/></div></a>
-        <a href="https://github.com/rafacv23/f1api-sdk" title="NPM package" target="_blank" rel="noreferrer" class="hover:animate-pulse">
+    <div class="flex items-center space-x-2">
+        <a href="/about" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">About</a>
+        <a href="/blog" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">Blog</a>
+        <a href="/contact" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">Contact</a>
+        <a href="https://github.com/rafacv23/f1api-live" title="GitHub repository" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out"><Github/></a>
+        <a href="https://github.com/rafacv23/f1api-sdk" title="NPM package" target="_blank" rel="noreferrer" class="cursor-pointer hover:bg-secondary/30 px-4 py-2 rounded transition duration-300 ease-in-out">
             <Download/>
         </a>
     </div>

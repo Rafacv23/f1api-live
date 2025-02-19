@@ -30,12 +30,15 @@ const haveSprint = checkSprint(raceInfo)
       {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
         <h1>Qualifying - {race?.circuit.country} {year}</h1>
-        <SessionNav year={year} round={round} haveSprint={haveSprint} />
         <p>{formatDate(race?.schedule.qualy.date)}, {race?.circuit.circuitName}, round {race?.round}</p>
+        <SessionNav year={year} round={round} haveSprint={haveSprint} />
         )}
     </div>
     {qualy ? (
+        <div>
+        <h2 class="mb-2 text-xl">Qualifying</h2>
         <QualyTable qualyResults={qualy} />
+        </div>
     ) : (
         <p>Session data is not available at the moment.</p>
     )}

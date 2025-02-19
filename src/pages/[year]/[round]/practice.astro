@@ -41,25 +41,25 @@ if (year && round) {
       {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
             <h1>Practice - {race?.circuit.country} {year}</h1>
-            <SessionNav year={year} round={round} haveSprint={haveSprint} />
             <p>{formatDate(raceInfo?.race[0]?.schedule.fp1.date)}, {raceInfo?.race[0]?.circuit.circuitName}, round {raceInfo?.race[0]?.round}</p>
+            <SessionNav year={year} round={round} haveSprint={haveSprint} />
         )}
     </div>
-    <div class="grid space-y-4">
+    <div class="grid">
         {fp1 ? (
             <>
               {haveSprint ? (
                 <>
-                  <h2>Practice 1</h2>
+                  <h2 class="text-xl mb-2">Practice 1</h2>
                   <PracticeTable fpResults={fp1} fpSession="fp1" />
                 </>
               ) : (
                 <>
-                  <h2>Practice 3</h2>
+                  <h2 class="text-xl mb-2">Practice 3</h2>
                   {fp3 ? <PracticeTable fpResults={fp3} fpSession="fp3" /> : null}
-                  <h2>Practice 2</h2>
+                  <h2 class="text-xl mb-2">Practice 2</h2>
                   {fp2 ? <PracticeTable fpResults={fp2} fpSession="fp2" /> : null}
-                  <h2>Practice 1</h2>
+                  <h2 class="text-xl mb-2">Practice 1</h2>
                   <PracticeTable fpResults={fp1} fpSession="fp1" />
                 </>
               )}

@@ -15,11 +15,14 @@ races =  await f1api.getRacesByYear({ year: parseInt(year) });
 ---
 
 <Layout>
-    <h1 class="my-4">{year} F1 Calendar</h1>
-    <SeasonsNav/>
-    { year ?      <SubNav year={parseInt(year)} />
- : null}    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
-        {races?.races.map((race) => 
+    <div class="px-4">
+        <h1 class="my-4">{year} F1 Calendar</h1>
+        <SeasonsNav/>
+        { year ?      <SubNav year={parseInt(year)} />
+        : null}  
+    </div>
+    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 my-8 mx-4 md:mx-auto">
+     {races?.races.map((race) => 
             <li class="rounded p-4 shadow hover:shadow-lg min-h-[100px] bg-secondary text-primary hover:bg-secondary/90 ease-in-out duration-500 hover:transition">
                 <a class="cursor-pointer" href={`/${year}/${race.round}/race`}>
                 <header>

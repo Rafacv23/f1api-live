@@ -8,7 +8,7 @@ const { qualyResults } = Astro.props;
 
 const results = qualyResults?.races?.qualyResults
 ---
-
+<div class="relative overflow-x-auto">
 <table class="table-auto w-full mb-4">
     <thead class="border-b bg-secondary text-primary">
         <tr>
@@ -33,3 +33,4 @@ const results = qualyResults?.races?.qualyResults
         )}
     </tbody>
 </table>
+</div>

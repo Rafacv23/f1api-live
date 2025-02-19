@@ -15,11 +15,13 @@ if(year){
 ---
 
 <Layout>
-    <h1>Driver standings, season {year}</h1>
+    <div class="px-4">
+    <h1 class="my-4">Driver standings, season {year}</h1>
     <SeasonsNav/>
     { year ?      <SubNav year={parseInt(year)} />
  : null}
-    <ul class="grid gap-4 my-8">
+    </div>
+    <ul class="grid gap-4 my-8 mx-4 md:mx-auto">
         {driverStandings?.drivers_championship.map((driver) => 
         <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">
             <p>{driver.position}.</p>

@@ -24,10 +24,10 @@ const haveSprint = checkSprint(raceInfo)
 ---
 
 <Layout>
-    <div class="mb-8">
+    <div class="px-4">
         {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
-        <h1>Race - {race?.circuit.country} {year}</h1>
+        <h1 my-4>Race - {race?.circuit.country} {year}</h1>
         <p>{formatDate(race?.schedule.race.date)}, {race?.circuit.circuitName}, Round {race?.round}</p>
         <SessionNav year={year} round={round} haveSprint={haveSprint} />
         )}
@@ -35,7 +35,7 @@ const haveSprint = checkSprint(raceInfo)
     {race ? (
         <div class="mb-8">
             <h2 class="mb-2 text-xl">Race</h2>
-            <ul class="grid grid-cols-1 gap-4">
+            <ul class="grid gap-4 my-8 mx-4 md:mx-auto">
                 {race?.races?.results?.map((result) => (
                     <li id="card">
                         <h2>{result.driver?.name} {result.driver?.surname}</h2>

@@ -16,12 +16,15 @@ if(year){
 
 <Layout>
     <main class="py-4">
-        <h1>Team standings, season {year}</h1>
-        <SeasonsNav/>
-        { year ?      <SubNav year={parseInt(year)} />
+        <div class="px-4">
+
+            <h1 class="my-4">Team standings, season {year}</h1>
+            <SeasonsNav/>
+            { year ?      <SubNav year={parseInt(year)} />
  : null}
-        <ul class="grid gap-4 my-8">
-            {teamStandings?.constructors_championship.map((team) => 
+    </div>
+    <ul class="grid gap-4 my-8 mx-4 md:mx-auto">
+        {teamStandings?.constructors_championship.map((team) => 
         <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">
             <p>{team.position}.</p>
             <h2>{team.team.teamName}</h2>

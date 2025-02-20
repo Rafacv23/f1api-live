@@ -10,13 +10,16 @@ interface Props {
 	description: string;
 	canonical?: string
 }
+
+const { title, description, canonical } = Astro.props;
+
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<ViewTransitions/>
-		<SEO/>
+		<SEO title={title} description={description} canonical={canonical}/>
 	</head>
 	<body>
 		<Header/>

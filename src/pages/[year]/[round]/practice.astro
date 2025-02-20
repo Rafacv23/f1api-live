@@ -37,7 +37,7 @@ if (year && round) {
 ---
 
 <Layout>
-    <div class="mb-8 px-4">
+    <div class="mb-8">
       {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
             <h1 class="my-4">Practice - {race?.circuit.country} {year}</h1>

@@ -26,7 +26,7 @@ const haveSprint = checkSprint(raceInfo)
 ---
 
 <Layout>
-    <div class="px-4">
+    <div>
         {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
         <h1 class="my-4">Qualifying - {race?.circuit.country} {year}</h1>

@@ -34,19 +34,31 @@ const haveSprint = checkSprint(raceInfo)
     </div>
     {race ? (
         <div class="mb-8">
-            <h2 class="mb-2 text-xl">Race</h2>
-            <ul class="grid gap-4 my-8 mx-4 md:mx-auto">
-                {race?.races?.results?.map((result) => (
-                    <li id="card">
-                        <h2>{result.driver?.name} {result.driver?.surname}</h2>
-                        <p>
-                            Position: {result.position}
-                            <br />
-                            Points: {result.points}
-                        </p>
-                    </li>
+            <h2 class="mb-2 text-xl pl-4 my-4">Race</h2>
+            <div class="relative overflow-x-auto mb-8">
+        <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+                <tr>
+                    <th class="py-5 px-3 text-left">Position</th>
+                    <th class="py-5 px-3 text-left">Driver</th>
+                    <th class="px-3 text-left">Team</th>
+                    <th class="px-3 text-left">Grid</th>
+                    <th class="px-3 text-left">Points</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+                {race?.races.results.map((result) => (
+                    <tr class="hover:bg-secondary/10 transition">
+                        <td class="py-5 px-3 font-medium">{result.position}</td>
+                        <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                        <td class="px-3">{result.team.teamName}</td>
+                        <td class="px-3">{result.grid}</td>
+                        <td class="px-3 font-semibold">{result.points}</td>
+                    </tr>
                 ))}
-            </ul>
+            </tbody>
+        </table>
+        </div>
         </div>
     ) : (
         <p>Session data is not available at the moment.</p>

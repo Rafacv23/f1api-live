@@ -19,25 +19,25 @@ const generatePositions = (results: any[]): any[] => {
 const processedResults = generatePositions(results);
 
 ---
-<div class="relative overflow-x-auto">
-<table class="table-auto w-full mb-4">
-    <thead class="border-b bg-secondary text-primary">
-        <tr>
-            <th class="py-4">Position</th>
-            <th>Driver</th>
-            <th>Team</th>
-            <th>Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        {processedResults.map((result: any) => 
-  <tr class="border-b">
-    <td class="py-4">{result.position}</td>
-    <td>{result.driver.name} {result.driver.surname}</td>
-    <td>{result.team.teamName}</td>
-    <td>{result.time}</td>
-  </tr>
-    )}
-    </tbody>
-</table>
+<div class="relative overflow-x-auto mb-8">
+    <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+            <tr>
+                <th class="py-5 px-3 text-left">Position</th>
+                <th class="py-5 px-3 text-left">Driver</th>
+                <th class="px-3 text-left">Team</th>
+                <th class="px-3 text-left">Time</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            {processedResults.map((result: any) => (
+                <tr class="hover:bg-secondary/10 transition">
+                    <td class="py-5 px-3 font-medium">{result.position}</td>
+                    <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                    <td class="px-3">{result.team.teamName}</td>
+                    <td class="px-3 font-semibold">{result.time}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
 </div>

@@ -29,7 +29,7 @@ if (year && round) {
     <div>
         {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
-        <h1>Sprint - {race?.circuit.country} {year}</h1>
+        <h1 class="my-4">Sprint - {race?.circuit.country} {year}</h1>
         <p>{formatDate(race?.schedule.qualy.date)}, {race?.circuit.circuitName}, Round {race?.round}</p>
         <SessionNav year={year} round={round} haveSprint={true} />
         )}
@@ -37,78 +37,84 @@ if (year && round) {
     {
         race ? 
         <h2 class="mb-2 text-xl">Sprint Race</h2>
-        <table class="table-auto w-full mb-4">
-            <thead class="border-b bg-secondary text-primary">
-                <tr>
-                    <th class="py-4">Position</th>
-                    <th>Driver</th>
-                    <th>Team</th>
-                    <th>Grid</th>
-                    <th>Points</th>
+        <div class="relative overflow-x-auto mb-8">
+    <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+            <tr>
+                <th class="py-5 px-3 text-left">Position</th>
+                <th class="py-5 px-3 text-left">Driver</th>
+                <th class="px-3 text-left">Team</th>
+                <th class="px-3 text-left">Grid</th>
+                <th class="px-3 text-left">Points</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            {race?.races.sprintRaceResults.map((result) => (
+                <tr class="hover:bg-secondary/10 transition">
+                    <td class="py-5 px-3 font-medium">{result.position}</td>
+                    <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                    <td class="px-3">{result.team.teamName}</td>
+                    <td class="px-3">{result.gridPosition}</td>
+                    <td class="px-3 font-semibold">{result.points}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {race?.races.sprintRaceResults.map((result: any) => 
-                <tr class="border-b">
-                    <td class="py-4">{result.position}</td>
-                    <td>{result.driver.name} {result.driver.surname}</td>
-                    <td>{result.team.teamName}</td>
-                    <td>{result.gridPosition}</td>
-                    <td>{result.points}</td>
-                </tr>
-                )}
-            </tbody>
-        </table>
+            ))}
+        </tbody>
+    </table>
+    </div>
         <h2 class="mb-2 text-xl">Sprint Qualifying</h2>
-        <table class="table-auto w-full mb-4">
-            <thead class="border-b bg-secondary text-primary">
-                <tr>
-                    <th class="py-4">Position</th>
-                    <th>Driver</th>
-                    <th>Team</th>
-                    <th>SQ1</th>
-                    <th>SQ2</th>
-                    <th>SQ3</th>
+        <div class="relative overflow-x-auto mb-8">
+    <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+            <tr>
+                <th class="py-5 px-3 text-left">Position</th>
+                <th class="py-5 px-3 text-left">Driver</th>
+                <th class="px-3 text-left">Team</th>
+                <th class="px-3 text-left">SQ1</th>
+                <th class="px-3 text-left">SQ2</th>
+                <th class="px-3 text-left">SQ3</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            {qualy?.races.sprintQualyResults.map((result) => (
+                <tr class="hover:bg-secondary/10 transition">
+                    <td class="py-5 px-3 font-medium">{result.gridPosition}</td>
+                    <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                    <td class="px-3">{result.team.teamName}</td>
+                    <td class="px-3">{result.sq1}</td>
+                    <td class="px-3">{result.sq2}</td>
+                    <td class="px-3">{result.sq3}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {qualy?.races.sprintQualyResults.map((result: any) => 
-                <tr class="border-b">
-                    <td class="py-4">{result.gridPosition}</td>
-                    <td>{result.driver.name} {result.driver.surname}</td>
-                    <td>{result.team.teamName}</td>
-                    <td>{result.sq1}</td>
-                    <td>{result.sq2}</td>
-                    <td>{result.sq3}</td>
+            ))}
+        </tbody>
+    </table>
+    </div> : qualy ?         
+            <h2 class="mb-2 text-xl">Sprint Qualifying</h2>
+        <div class="relative overflow-x-auto mb-8">
+    <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+            <tr>
+                <th class="py-5 px-3 text-left">Position</th>
+                <th class="py-5 px-3 text-left">Driver</th>
+                <th class="px-3 text-left">Team</th>
+                <th class="px-3 text-left">SQ1</th>
+                <th class="px-3 text-left">SQ2</th>
+                <th class="px-3 text-left">SQ3</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            {qualy?.races.sprintQualyResults.map((result) => (
+                <tr class="hover:bg-secondary/10 transition">
+                    <td class="py-5 px-3 font-medium">{result.gridPosition}</td>
+                    <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                    <td class="px-3">{result.team.teamName}</td>
+                    <td class="px-3">{result.sq1}</td>
+                    <td class="px-3">{result.sq2}</td>
+                    <td class="px-3">{result.sq3}</td>
                 </tr>
-                )}
-            </tbody>
-        </table> : qualy ?         
-        <h2>Sprint Qualifying</h2>
-        <table class="table-auto w-full mb-4">
-            <thead class="border-b bg-secondary text-primary">
-                <tr>
-                    <th class="py-4">Position</th>
-                    <th>Driver</th>
-                    <th>Team</th>
-                    <th>SQ1</th>
-                    <th>SQ2</th>
-                    <th>SQ3</th>
-                </tr>
-            </thead>
-            <tbody>
-                {qualy?.races.sprintQualyResults.map((result: any) => 
-                <tr class="border-b">
-                    <td class="py-4">{result.gridPosition}</td>
-                    <td>{result.driver.name} {result.driver.surname}</td>
-                    <td>{result.team.teamName}</td>
-                    <td>{result.sq1}</td>
-                    <td>{result.sq2}</td>
-                    <td>{result.sq3}</td>
-                </tr>
-                )}
-            </tbody>
-        </table> :
+            ))}
+        </tbody>
+    </table>
+    </div> :
          <p>Session data is not available at the moment.</p>
     }
 </Layout>

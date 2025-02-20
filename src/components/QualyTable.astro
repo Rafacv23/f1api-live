@@ -8,29 +8,29 @@ const { qualyResults } = Astro.props;
 
 const results = qualyResults?.races?.qualyResults
 ---
-<div class="relative overflow-x-auto">
-<table class="table-auto w-full mb-4">
-    <thead class="border-b bg-secondary text-primary">
-        <tr>
-            <th class="py-4">Position</th>
-            <th>Driver</th>
-            <th>Team</th>
-            <th>Q1</th>
-            <th>Q2</th>
-            <th>Q3</th>
-        </tr>
-    </thead>
-    <tbody>
-        {results.map((result: any) => 
-        <tr class="border-b">
-            <td class="py-4">{result.gridPosition}</td>
-            <td>{result.driver.name} {result.driver.surname}</td>
-            <td>{result.team.teamName}</td>
-            <td>{result.q1}</td>
-            <td>{result.q2}</td>
-            <td>{result.q3}</td>
-        </tr>
-        )}
-    </tbody>
-</table>
+<div class="relative overflow-x-auto mb-8">
+    <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+            <tr>
+                <th class="py-5 px-3 text-left">Position</th>
+                <th class="py-5 px-3 text-left">Driver</th>
+                <th class="px-3 text-left">Team</th>
+                <th class="px-3 text-left">Q1</th>
+                <th class="px-3 text-left">Q2</th>
+                <th class="px-3 text-left">Q3</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y">
+            {results.map((result: any) => (
+                <tr class="hover:bg-secondary/10 transition">
+                    <td class="py-5 px-3 font-medium">{result.gridPosition}</td>
+                    <td class="px-3">{result.driver.name} {result.driver.surname}</td>
+                    <td class="px-3">{result.team.teamName}</td>
+                    <td class="px-3">{result.q1}</td>
+                    <td class="px-3">{result.q2}</td>
+                    <td class="px-3">{result.q3}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
 </div>

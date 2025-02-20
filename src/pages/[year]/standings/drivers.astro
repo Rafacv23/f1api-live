@@ -21,14 +21,26 @@ if(year){
     { year ?      <SubNav year={parseInt(year)} />
  : null}
     </div>
-    <ul class="grid gap-4 my-8 mx-4 md:mx-auto">
-        {driverStandings?.drivers_championship.map((driver) => 
-        <li class="rounded p-4 shadow bg-secondary text-primary hover:bg-secondary/90 hover:transition flex items-center justify-between">
-            <p>{driver.position}.</p>
-            <h2>{driver.driver.name} {driver.driver.surname}</h2>
-            <p>{driver.team.teamName}</p>
-            <p>Points: {driver.points}</p>
-        </li>
-    )}
-    </ul>
+    <div class="relative overflow-x-auto mb-8">
+        <table class="min-w-full border border-gray-200 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-secondary text-primary uppercase text-sm font-semibold">
+                <tr>
+                    <th class="py-5 px-3 text-left">Position</th>
+                    <th class="px-3 text-left">Driver</th>
+                    <th class="px-3 text-left">Team</th>
+                    <th class="px-3 text-left">Points</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y">
+                {driverStandings?.drivers_championship.map((driver) => (
+                    <tr class="hover:bg-secondary/10 transition">
+                        <td class="py-5 px-3 font-medium">{driver.position}</td>
+                        <td class="px-3">{driver.driver.name} {driver.driver.surname}</td>
+                        <td class="px-3">{driver.team.teamName}</td>
+                        <td class="px-3 font-semibold">{driver.points}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+        </div>
 </Layout>

@@ -2,6 +2,7 @@
 import SeasonsNav from "@/components/navigation/SeasonsNav.astro";
 import SubNav from "@/components/navigation/SubNav.astro";
 import Layout from "@/layouts/Layout.astro";
+import { SITE_NAME } from "@/lib/constants";
 import { f1api } from "@/lib/f1Api";
 
 const { year } = Astro.params;
@@ -14,7 +15,7 @@ if(year){
 
 ---
 
-<Layout>
+<Layout title=`${year} F1 Driver Standings | ${SITE_NAME}` description=`Formula 1 Driver Standings of the ${year} season.`>
     <div>
     <h1 class="my-4">Driver standings -{year}</h1>
     <SeasonsNav/>

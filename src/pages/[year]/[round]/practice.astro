@@ -5,6 +5,7 @@ import SessionNav from "@/components/navigation/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 import { checkSprint, formatDate } from "@/lib/utils";
+import { SITE_NAME } from "@/lib/constants";
 
 const { year, round } = Astro.params;
 // retrieve free practice sessions
@@ -36,8 +37,8 @@ if (year && round) {
 }
 ---
 
-<Layout>
-    <div class="mb-8">
+<Layout title=`${raceInfo?.race[0]?.raceName} Practice | ${SITE_NAME}` description=`Formula 1 practice results of the ${raceInfo?.race[0]?.raceName} race.`>
+  <div class="mb-8">
       {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 
             <h1 class="my-4">Practice - {race?.circuit.country} {year}</h1>

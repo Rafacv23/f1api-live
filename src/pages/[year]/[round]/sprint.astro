@@ -4,6 +4,7 @@ import SessionNav from "@/components/navigation/SessionNav.astro";
 import { f1api } from "@/lib/f1Api";
 import CalendarNav from "@/components/navigation/CalendarNav.astro";
 import { formatDate } from "@/lib/utils";
+import { SITE_NAME } from "@/lib/constants";
 
 const { year, round } = Astro.params;
 
@@ -25,7 +26,7 @@ if (year && round) {
 
 ---
 
-<Layout>
+<Layout title=`${raceInfo?.race[0]?.raceName} Sprint | ${SITE_NAME}` description=`Formula 1 sprint results of the ${raceInfo?.race[0]?.raceName} race.`>
     <div>
         {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 

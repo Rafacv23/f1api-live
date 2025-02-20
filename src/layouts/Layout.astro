@@ -3,17 +3,20 @@ import Footer from '@/components/Footer.astro'
 import Header from '@/components/navigation/Header.astro'
 import '@/styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
+import SEO from '@/components/SEO.astro'
+
+interface Props {
+	title: string;
+	description: string;
+	canonical?: string
+}
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/logo.avif" />
-		<meta name="generator" content={Astro.generator} />
-		<title>F1 API Live</title>
 		<ViewTransitions/>
+		<SEO/>
 	</head>
 	<body>
 		<Header/>

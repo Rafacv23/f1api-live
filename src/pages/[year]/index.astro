@@ -2,6 +2,7 @@
 import SeasonsNav from "@/components/navigation/SeasonsNav.astro";
 import SubNav from "@/components/navigation/SubNav.astro";
 import Layout from "@/layouts/Layout.astro";
+import { SITE_NAME } from "@/lib/constants";
 import { f1api } from "@/lib/f1Api";
 import { formatDate } from "@/lib/utils";
 
@@ -14,7 +15,7 @@ races =  await f1api.getRacesByYear({ year: parseInt(year) });
 }
 ---
 
-<Layout>
+<Layout title=`${year} F1 Calendar | ${SITE_NAME}` description=`Formula 1 Calendar of the ${year} season.`>
     <div class="px-4">
         <h1 class="my-4">{year} F1 Calendar</h1>
         <SeasonsNav/>

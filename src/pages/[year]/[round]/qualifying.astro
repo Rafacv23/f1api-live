@@ -5,6 +5,7 @@ import SessionNav from "@/components/navigation/SessionNav.astro";
 import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 import { checkSprint, formatDate } from "@/lib/utils";
+import { SITE_NAME } from "@/lib/constants";
 
 const { year, round } = Astro.params;
 
@@ -25,7 +26,7 @@ if(year && round){
 const haveSprint = checkSprint(raceInfo)
 ---
 
-<Layout>
+<Layout title=`${raceInfo?.race[0]?.raceName} Qualifying | ${SITE_NAME}` description=`Formula 1 qualifying results of the ${raceInfo?.race[0]?.raceName} race.`>
     <div>
         {year ? <CalendarNav year={parseInt(year)} /> : null}
         {raceInfo?.race.map((race) => 

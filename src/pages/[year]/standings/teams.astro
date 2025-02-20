@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { f1api } from "@/lib/f1Api";
 import SeasonsNav from "@/components/navigation/SeasonsNav.astro";
 import SubNav from "@/components/navigation/SubNav.astro";
+import { SITE_NAME } from "@/lib/constants";
 
 const { year } = Astro.params;
 
@@ -14,7 +15,7 @@ if(year){
 
 ---
 
-<Layout>
+<Layout title=`${year} F1 Team Standings | ${SITE_NAME}` description=`Formula 1 team standings of the ${year} season.`>
     <main class="py-4">
         <div>
             <h1 class="my-4">Team standings - {year}</h1>

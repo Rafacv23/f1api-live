@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://live.f1api.dev/sitemap-index.xml

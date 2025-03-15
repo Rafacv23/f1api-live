@@ -47,27 +47,43 @@ if (year && round) {
         )}
     </div>
     <div class="grid mb-8 mx-4 md:mx-auto">
-        {fp1 ? (
-            <>
-              {haveSprint ? (
+      {fp1 ? (
+        <>
+            {haveSprint ? (
+                // Sprint weekends only have FP1
                 <>
-                  <h2 class="text-xl mb-2">Practice 1</h2>
-                  <PracticeTable fpResults={fp1} fpSession="fp1" />
+                    <h2 class="text-xl mb-2">Practice 1</h2>
+                    <PracticeTable fpResults={fp1} fpSession="fp1" />
                 </>
-              ) : (
+            ) : (
+                // Normal weekends (FP1, FP2, FP3)
                 <>
-                  <h2 class="text-xl mb-2">Practice 3</h2>
-                  {fp3 ? <PracticeTable fpResults={fp3} fpSession="fp3" /> : null}
-                  <h2 class="text-xl mb-2">Practice 2</h2>
-                  {fp2 ? <PracticeTable fpResults={fp2} fpSession="fp2" /> : null}
-                  <h2 class="text-xl mb-2">Practice 1</h2>
-                  <PracticeTable fpResults={fp1} fpSession="fp1" />
+                    {fp3 ? (
+                        <>
+                            <h2 class="text-xl mb-2">Practice 3</h2>
+                            <PracticeTable fpResults={fp3} fpSession="fp3" />
+                        </>
+                    ) : (
+                        <p class="text-red-500">No Practice 3 data available</p>
+                    )}
+
+                    {fp2 ? (
+                        <>
+                            <h2 class="text-xl mb-2">Practice 2</h2>
+                            <PracticeTable fpResults={fp2} fpSession="fp2" />
+                        </>
+                    ) : (
+                        <p class="text-red-500">No Practice 2 data available</p>
+                    )}
+
+                    <h2 class="text-xl mb-2">Practice 1</h2>
+                    <PracticeTable fpResults={fp1} fpSession="fp1" />
                 </>
-              )}
-            </>
-          ) : (
-            <div>No Practice data available</div>
-          )}
+            )}
+        </>
+    ) : (
+        <div>No Practice data available</div>
+    )}
     </div>
 </Layout>
 

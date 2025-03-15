@@ -11,9 +11,13 @@ const results = fpResults?.races?.[`${fpSession}Results`]
 // Function to generate positions based on time
 const generatePositions = (results: any[]): any[] => {
     return results
-        .map((result: any) => ({ ...result, time: result.time }))
-        .sort((a, b) => a.time - b.time) // Sort by time
-        .map((result, index) => ({ ...result, position: index + 1 })); // Assign position based on sorted order
+        .map((result: any) => ({ ...result, time: result.time })) // Keep time reference
+        .sort((a, b) => {
+            if (a.time === null) return 1; // Move null times to the bottom
+            if (b.time === null) return -1;
+            return a.time - b.time; // Sort by time
+        })
+        .map((result, index) => ({ ...result, position: index + 1 })); // Assign position
 };
 
 const processedResults = generatePositions(results);
